@@ -12,6 +12,7 @@ import { inferType } from '@/lib/inference/inferTypes';
 import { detectLiteralsAndEnums } from '@/lib/inference/mergeSamples';
 import { generateInterface } from '@/lib/generators/generateTypescript';
 import { debounce } from '@/lib/utils/debounce';
+import { trackConversion, trackFileLoad, trackClear } from '@/lib/analytics/events';
 
 const DEFAULT_JSON = `{
   "id": 1,
@@ -34,6 +35,7 @@ export default function JsonToTypescriptPage() {
         const ast = detectLiteralsAndEnums(multiResult.data);
         const code = generateInterface(ast, 'Data');
         setOutput(code);
+        trackConversion('typescript', { multiSample: true });
         return;
       }
       
@@ -49,6 +51,7 @@ export default function JsonToTypescriptPage() {
       const ast = inferType(singleResult.data);
       const code = generateInterface(ast, 'Data');
       setOutput(code);
+      trackConversion('typescript', { multiSample: false });
     }, 200);
 
     debouncedConvert();
@@ -60,7 +63,16 @@ export default function JsonToTypescriptPage() {
         <>
           <div className="h-10 px-4 flex items-center justify-between border-b border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-950">
             <span className="text-sm font-medium text-stone-700 dark:text-stone-300">JSON</span>
-            <InputSource onLoad={setInput} onClear={() => setInput('')} />
+            <InputSource 
+              onLoad={(json) => {
+                setInput(json);
+                trackFileLoad('file');
+              }} 
+              onClear={() => {
+                setInput('');
+                trackClear();
+              }} 
+            />
           </div>
           <div className="flex-1 min-h-0">
             <JsonEditor value={input} onChange={setInput} />
