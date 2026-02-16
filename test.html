@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+  <style>
+    :root {
+      --spacing: .25rem;
+      --container-2xl: 42rem;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: #fafaf9;
+      color: #1c1917;
+      font-family: system-ui, sans-serif;
+    }
+    
+    .min-h-screen { min-height: 100vh; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .flex-1 { flex: 1; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    
+    .max-w-2xl { max-width: var(--container-2xl); }
+    .mx-auto { margin-inline: auto; }
+    .w-full { width: 100%; }
+    
+    .px-6 { padding-inline: calc(var(--spacing) * 6); }
+    .py-20 { padding-block: calc(var(--spacing) * 20); }
+    .py-6 { padding-block: calc(var(--spacing) * 6); }
+    .p-5 { padding: calc(var(--spacing) * 5); }
+    .mt-auto { margin-top: auto; }
+    .mb-12 { margin-bottom: calc(var(--spacing) * 12); }
+    .mb-16 { margin-bottom: calc(var(--spacing) * 16); }
+    .mb-1 { margin-bottom: calc(var(--spacing) * 1); }
+    .mb-2 { margin-bottom: calc(var(--spacing) * 2); }
+    .mb-3 { margin-bottom: calc(var(--spacing) * 3); }
+    .mb-4 { margin-bottom: calc(var(--spacing) * 4); }
+    .mb-6 { margin-bottom: calc(var(--spacing) * 6); }
+    .ml-4 { margin-left: calc(var(--spacing) * 4); }
+    .pt-10 { padding-top: calc(var(--spacing) * 10); }
+    
+    .bg-stone-50 { background-color: #fafaf9; }
+    .bg-white { background-color: #fff; }
+    .text-stone-500 { color: #79716b; }
+    .text-stone-600 { color: #57534d; }
+    .text-stone-900 { color: #1c1917; }
+    
+    .border { border: 1px solid; }
+    .border-t { border-top: 1px solid; }
+    .border-stone-300 { border-color: #d6d3d1; }
+    
+    .rounded-lg { border-radius: 0.5rem; }
+    
+    .text-sm { font-size: 0.875rem; }
+    .text-lg { font-size: 1.125rem; }
+    .text-3xl { font-size: 1.875rem; }
+    
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    
+    .tracking-tight { letter-spacing: -0.025em; }
+    .leading-relaxed { line-height: 1.625; }
+    
+    .block { display: block; }
+    .grid { display: grid; }
+    .gap-8 { gap: calc(var(--spacing) * 8); }
+    .space-y-3 > * + * { margin-top: calc(var(--spacing) * 3); }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen flex flex-col bg-stone-50">
+    <main class="flex-1 max-w-2xl mx-auto px-6 py-20 w-full">
+      <div class="mb-12">
+        <p class="text-sm text-stone-500 mb-3 font-medium">Developer Tools</p>
+        <h1 class="text-3xl font-semibold tracking-tight text-stone-900 mb-4">TypeDock</h1>
+        <p class="text-lg text-stone-600 leading-relaxed">Convert JSON to TypeScript interfaces and Zod schemas. Runs entirely in your browser.</p>
+      </div>
+      <div class="space-y-3 mb-16">
+        <a class="block p-5 bg-white border border-stone-300 rounded-lg" href="#">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="font-medium text-stone-900 mb-1">JSON to TypeScript</h2>
+              <p class="text-sm text-stone-500">Generate interfaces with smart type inference</p>
+            </div>
+            <span class="text-stone-500 ml-4">→</span>
+          </div>
+        </a>
+        <a class="block p-5 bg-white border border-stone-300 rounded-lg" href="#">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="font-medium text-stone-900 mb-1">JSON to Zod</h2>
+              <p class="text-sm text-stone-500">Create schemas with runtime validation</p>
+            </div>
+            <span class="text-stone-500 ml-4">→</span>
+          </div>
+        </a>
+      </div>
+      <div class="pt-10 border-t border-stone-300">
+        <h3 class="text-sm font-semibold text-stone-900 mb-6 uppercase tracking-wide">Features</h3>
+        <div class="grid gap-8">
+          <div>
+            <h4 class="font-medium text-stone-900 text-sm mb-2">Smart inference</h4>
+            <p class="text-sm text-stone-600 leading-relaxed">Detects optional fields, unions, and literals from multiple samples</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="border-t border-stone-300 bg-white py-6 px-6 mt-auto">
+      <div class="max-w-2xl mx-auto flex items-center justify-between text-sm text-stone-500">
+        <p>Built with Next.js and TypeScript</p>
+        <a href="#" class="hover:text-stone-900">GitHub</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
