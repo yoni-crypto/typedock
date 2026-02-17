@@ -1,0 +1,134 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { JsonEditor } from '@/components/editor/JsonEditor';
+import { CodeOutput } from '@/components/editor/CodeOutput';
+import { SplitLayout } from '@/components/layout/SplitLayout';
+import { CopyButton } from '@/components/ui/CopyButton';
+import { ErrorDisplay } from '@/components/ui/ErrorDisplay';
+import { InputSource } from '@/components/ui/InputSource';
+import { JsonUtilities } from '@/components/ui/JsonUtilities';
+import { parseJson, parseMultipleJson } from '@/lib/utils/parseJson';
+import { inferType } from '@/lib/inference/inferTypes';
+import { detectLiteralsAndEnums } from '@/lib/inference/mergeSamples';
+import { generateJsonSchema } from '@/lib/generators/generateJsonSchema';
+import { generateMockData } from '@/lib/generators/generateMockData';
+import { prettifyJson, minifyJson, sortJsonKeys, removeNullValues } from '@/lib/utils/jsonTransform';
+import { debounce } from '@/lib/utils/debounce';
+import { trackConversion, trackFileLoad, trackClear, trackMockGeneration } from '@/lib/analytics/events';
+import type { ASTType } from '@/lib/inference/astTypes';
+
+const DEFAULT_JSON = `{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john@example.com",
+  "active": true
+}`;
+
+export default function JsonToJsonSchemaPage() {
+  const [input, setInput] = useState(DEFAULT_JSON);
+  const [output, setOutput] = useState('');
+  const [error, setError] = useState('');
+  const [currentAST, setCurrentAST] = useState<ASTType | null>(null);
+
+  useEffect(() => {
+    const debouncedConvert = debounce(() => {
+      const multiResult = parseMultipleJson(input);
+      
+      if (multiResult.success) {
+        setError('');
+        const ast = detectLiteralsAndEnums(multiResult.data);
+        setCurrentAST(ast);
+        const schema = generateJsonSchema(ast, 'Data');
+        setOutput(schema);
+        trackConversion('json-to-json-schema', { multiSample: true });
+        return;
+      }
+      
+      const singleResult = parseJson(input);
+      
+      if (!singleResult.success) {
+        setError(singleResult.error);
+        setOutput('');
+        setCurrentAST(null);
+        return;
+      }
+
+      setError('');
+      const ast = inferType(singleResult.data);
+      setCurrentAST(ast);
+      const schema = generateJsonSchema(ast, 'Data');
+      setOutput(schema);
+      trackConversion('json-to-json-schema', { multiSample: false });
+    }, 200);
+
+    debouncedConvert();
+  }, [input]);
+
+  const handleGenerateMock = () => {
+    if (!currentAST) return;
+    const mockData = generateMockData(currentAST, 1);
+    setInput(JSON.stringify(mockData, null, 2));
+    trackMockGeneration('json-to-json-schema');
+  };
+
+  return (
+    <SplitLayout
+      left={
+        <>
+          <div className="h-10 px-4 flex items-center justify-between border-b border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-950">
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium text-stone-700 dark:text-stone-300">JSON</span>
+              <JsonUtilities
+                onPrettify={() => setInput(prettifyJson(input))}
+                onMinify={() => setInput(minifyJson(input))}
+                onSort={() => setInput(sortJsonKeys(input))}
+                onRemoveNulls={() => setInput(removeNullValues(input))}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              {currentAST && (
+                <button
+                  onClick={handleGenerateMock}
+                  className="text-xs px-2 py-1 rounded bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors"
+                >
+                  Generate Mock
+                </button>
+              )}
+              <InputSource 
+                onLoad={(json) => {
+                  setInput(json);
+                  trackFileLoad('file');
+                }} 
+                onClear={() => {
+                  setInput('');
+                  trackClear();
+                }} 
+              />
+            </div>
+          </div>
+          <div className="flex-1 min-h-0">
+            <JsonEditor value={input} onChange={setInput} />
+          </div>
+        </>
+      }
+      right={
+        <>
+          <div className="h-10 px-4 flex items-center justify-between border-b border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900">
+            <span className="text-sm font-medium text-stone-700 dark:text-stone-300">JSON Schema</span>
+            {output && !error && <CopyButton text={output} />}
+          </div>
+          <div className="flex-1 min-h-0">
+            {error ? (
+              <div className="p-4">
+                <ErrorDisplay error={error} />
+              </div>
+            ) : (
+              <CodeOutput value={output} language="javascript" />
+            )}
+          </div>
+        </>
+      }
+    />
+  );
+}

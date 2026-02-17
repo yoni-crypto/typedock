@@ -12,7 +12,11 @@ interface SplitLayoutProps {
 const tools = [
   { href: '/json-to-typescript', label: 'JSON → TypeScript' },
   { href: '/json-to-zod', label: 'JSON → Zod' },
+  { href: '/json-to-json-schema', label: 'JSON → JSON Schema' },
+  { href: '/json-schema-to-typescript', label: 'JSON Schema → TS' },
   { href: '/typescript-to-zod', label: 'TypeScript → Zod' },
+  { href: '/zod-to-typescript', label: 'Zod → TypeScript' },
+  { href: '/json-diff', label: 'JSON Diff' },
   { href: '/validator', label: 'Validator' },
 ];
 

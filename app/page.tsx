@@ -63,6 +63,32 @@ export default function HomePage() {
           </Link>
 
           <Link
+            href="/json-to-json-schema"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">JSON to JSON Schema</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Generate JSON Schema for APIs</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/json-schema-to-typescript"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">JSON Schema to TypeScript</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Convert schemas to types</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
             href="/typescript-to-zod"
             className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
           >
@@ -70,6 +96,32 @@ export default function HomePage() {
               <div>
                 <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">TypeScript to Zod</h2>
                 <p className="text-sm text-stone-500 dark:text-stone-400">Convert interfaces to Zod schemas</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/zod-to-typescript"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">Zod to TypeScript</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Extract types using z.infer</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/json-diff"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">JSON Diff</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Compare JSON objects</p>
               </div>
               <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
             </div>
