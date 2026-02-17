@@ -137,6 +137,18 @@ function typeToKey(type: ASTType): string {
   if (type.kind === 'array') {
     return `array:${typeToKey(type.elementType)}`;
   }
+  if (type.kind === 'tuple') {
+    return `tuple:${type.elements.map(e => typeToKey(e.type)).join(',')}`;
+  }
+  if (type.kind === 'record') {
+    return `record:${typeToKey(type.keyType)}:${typeToKey(type.valueType)}`;
+  }
+  if (type.kind === 'intersection') {
+    return `intersection:${type.types.map(typeToKey).join('&')}`;
+  }
+  if (type.kind === 'reference') {
+    return `reference:${type.name}`;
+  }
   if (type.kind === 'object') {
     const keys = Array.from(type.properties.keys()).sort();
     return `object:${keys.join(',')}`;

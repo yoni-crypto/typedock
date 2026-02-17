@@ -4,6 +4,18 @@ export function generateInterface(ast: ASTType, name: string): string {
   if (ast.kind === 'array') {
     return `export type ${name} = ${generateType(ast, 0)};`;
   }
+  if (ast.kind === 'tuple') {
+    return `export type ${name} = ${generateType(ast, 0)};`;
+  }
+  if (ast.kind === 'union') {
+    return `export type ${name} = ${generateType(ast, 0)};`;
+  }
+  if (ast.kind === 'intersection') {
+    return `export type ${name} = ${generateType(ast, 0)};`;
+  }
+  if (ast.kind === 'record') {
+    return `export type ${name} = ${generateType(ast, 0)};`;
+  }
   return `export interface ${name} ${generateType(ast, 0)}`;
 }
 
@@ -17,6 +29,22 @@ function generateType(type: ASTType, depth: number): string {
     
     case 'array':
       return generateArrayType(type.elementType, depth);
+    
+    case 'tuple':
+      const tupleElements = type.elements.map(el => {
+        const tsType = generateType(el.type, depth);
+        return el.optional ? `${tsType}?` : tsType;
+      });
+      return `[${tupleElements.join(', ')}]`;
+    
+    case 'record':
+      return `Record<${generateType(type.keyType, depth)}, ${generateType(type.valueType, depth)}>`;
+    
+    case 'intersection':
+      return type.types.map(t => generateType(t, depth)).join(' & ');
+    
+    case 'reference':
+      return type.name;
     
     case 'object':
       return generateObjectType(type, depth);
@@ -40,6 +68,10 @@ function generateArrayType(elementType: ASTType, depth: number): string {
 }
 
 function generateObjectType(obj: ObjectType, depth: number): string {
+  if (obj.properties.size === 0 && obj.indexSignature) {
+    return `Record<${obj.indexSignature.keyType}, ${generateType(obj.indexSignature.valueType, depth)}>`;
+  }
+  
   if (obj.properties.size === 0) {
     return '{}';
   }
@@ -52,6 +84,10 @@ function generateObjectType(obj: ObjectType, depth: number): string {
     const optional = prop.optional ? '?' : '';
     const propType = generateType(prop.type, depth + 1);
     lines.push(`${indent}${key}${optional}: ${propType};`);
+  }
+  
+  if (obj.indexSignature) {
+    lines.push(`${indent}[key: ${obj.indexSignature.keyType}]: ${generateType(obj.indexSignature.valueType, depth + 1)};`);
   }
 
   return `{\n${lines.join('\n')}\n${closeIndent}}`;

@@ -42,10 +42,45 @@ function generateZodType(type: ASTType, depth: number, strict: boolean): string 
     case 'array':
       return `z.array(${generateZodType(type.elementType, depth, strict)})`;
     
+    case 'tuple':
+      const tupleElements = type.elements.map(el => {
+        const zodType = generateZodType(el.type, depth, strict);
+        return el.optional ? `${zodType}.optional()` : zodType;
+      });
+      return `z.tuple([${tupleElements.join(', ')}])`;
+    
+    case 'record':
+      // For Record<string, T> -> z.record(z.string())
+      if (type.keyType.kind === 'primitive' && type.keyType.type === 'string') {
+        return `z.record(${generateZodType(type.valueType, depth, strict)})`;
+      }
+      return `z.record(${generateZodType(type.keyType, depth, strict)}, ${generateZodType(type.valueType, depth, strict)})`;
+    
+    case 'intersection':
+      return `z.intersection(${type.types.map(t => generateZodType(t, depth, strict)).join(', ')})`;
+    
+    case 'reference':
+      // For recursive types, use z.lazy
+      return `${type.name}Schema`;
+    
     case 'object':
       return generateObjectZod(type, depth, strict);
     
     case 'union':
+      // Check if all union members are string literals -> use z.enum()
+      const allStringLiterals = type.types.every(t => 
+        t.kind === 'literal' && typeof t.value === 'string'
+      );
+      
+      if (allStringLiterals) {
+        const values = type.types
+          .filter((t): t is Extract<ASTType, { kind: 'literal'; value: string }> => 
+            t.kind === 'literal' && typeof t.value === 'string'
+          )
+          .map(t => t.value);
+        return `z.enum([${values.map(v => `"${v}"`).join(', ')}])`;
+      }
+      
       return `z.union([${type.types.map(t => generateZodType(t, depth, strict)).join(', ')}])`;
     
     case 'enum':
@@ -68,6 +103,11 @@ function generatePrimitiveZod(type: string): string {
 }
 
 function generateObjectZod(obj: ObjectType, depth: number, strict: boolean): string {
+  // Handle index signature only (no properties)
+  if (obj.properties.size === 0 && obj.indexSignature) {
+    return `z.record(${generateZodType(obj.indexSignature.valueType, depth, strict)})`;
+  }
+  
   if (obj.properties.size === 0) {
     return 'z.object({})';
   }
@@ -85,7 +125,14 @@ function generateObjectZod(obj: ObjectType, depth: number, strict: boolean): str
   }
 
   const strictSuffix = strict ? '.strict()' : '';
-  return `z.object({\n${lines.join('\n')}\n${closeIndent}})${strictSuffix}`;
+  let result = `z.object({\n${lines.join('\n')}\n${closeIndent}})${strictSuffix}`;
+  
+  // Handle index signature with properties
+  if (obj.indexSignature) {
+    result += `.and(z.record(${generateZodType(obj.indexSignature.valueType, depth, strict)}))`;
+  }
+  
+  return result;
 }
 
 function generateTypeScriptType(type: ASTType, depth: number): string {
@@ -98,6 +145,22 @@ function generateTypeScriptType(type: ASTType, depth: number): string {
     
     case 'array':
       return generateArrayTypeScript(type.elementType, depth);
+    
+    case 'tuple':
+      const tupleElements = type.elements.map(el => {
+        const tsType = generateTypeScriptType(el.type, depth);
+        return el.optional ? `${tsType}?` : tsType;
+      });
+      return `[${tupleElements.join(', ')}]`;
+    
+    case 'record':
+      return `Record<${generateTypeScriptType(type.keyType, depth)}, ${generateTypeScriptType(type.valueType, depth)}>`;
+    
+    case 'intersection':
+      return type.types.map(t => generateTypeScriptType(t, depth)).join(' & ');
+    
+    case 'reference':
+      return type.name;
     
     case 'object':
       return generateObjectTypeScript(type, depth);

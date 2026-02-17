@@ -12,6 +12,7 @@ interface SplitLayoutProps {
 const tools = [
   { href: '/json-to-typescript', label: 'JSON → TypeScript' },
   { href: '/json-to-zod', label: 'JSON → Zod' },
+  { href: '/typescript-to-zod', label: 'TypeScript → Zod' },
 ];
 
 export function SplitLayout({ left, right }: SplitLayoutProps) {
