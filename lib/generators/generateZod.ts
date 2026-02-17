@@ -74,10 +74,13 @@ function generateZodType(type: ASTType, depth: number, strict: boolean): string 
       
       if (allStringLiterals) {
         const values = type.types
-          .filter((t): t is Extract<ASTType, { kind: 'literal'; value: string }> => 
-            t.kind === 'literal' && typeof t.value === 'string'
-          )
-          .map(t => t.value);
+          .map(t => {
+            if (t.kind === 'literal' && typeof t.value === 'string') {
+              return t.value;
+            }
+            return '';
+          })
+          .filter(v => v !== '');
         return `z.enum([${values.map(v => `"${v}"`).join(', ')}])`;
       }
       
