@@ -7,12 +7,16 @@ import { SplitLayout } from '@/components/layout/SplitLayout';
 import { CopyButton } from '@/components/ui/CopyButton';
 import { ErrorDisplay } from '@/components/ui/ErrorDisplay';
 import { InputSource } from '@/components/ui/InputSource';
+import { JsonUtilities } from '@/components/ui/JsonUtilities';
 import { parseJson, parseMultipleJson } from '@/lib/utils/parseJson';
 import { inferType } from '@/lib/inference/inferTypes';
 import { detectLiteralsAndEnums } from '@/lib/inference/mergeSamples';
 import { generateInterface } from '@/lib/generators/generateTypescript';
+import { generateMockData } from '@/lib/generators/generateMockData';
+import { prettifyJson, minifyJson, sortJsonKeys, removeNullValues } from '@/lib/utils/jsonTransform';
 import { debounce } from '@/lib/utils/debounce';
-import { trackConversion, trackFileLoad, trackClear } from '@/lib/analytics/events';
+import { trackConversion, trackFileLoad, trackClear, trackMockGeneration } from '@/lib/analytics/events';
+import type { ASTType } from '@/lib/inference/astTypes';
 
 const DEFAULT_JSON = `{
   "id": 1,
@@ -25,6 +29,7 @@ export default function JsonToTypescriptPage() {
   const [input, setInput] = useState(DEFAULT_JSON);
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
+  const [currentAST, setCurrentAST] = useState<ASTType | null>(null);
 
   useEffect(() => {
     const debouncedConvert = debounce(() => {
@@ -33,6 +38,7 @@ export default function JsonToTypescriptPage() {
       if (multiResult.success) {
         setError('');
         const ast = detectLiteralsAndEnums(multiResult.data);
+        setCurrentAST(ast);
         const code = generateInterface(ast, 'Data');
         setOutput(code);
         trackConversion('typescript', { multiSample: true });
@@ -44,11 +50,13 @@ export default function JsonToTypescriptPage() {
       if (!singleResult.success) {
         setError(singleResult.error);
         setOutput('');
+        setCurrentAST(null);
         return;
       }
 
       setError('');
       const ast = inferType(singleResult.data);
+      setCurrentAST(ast);
       const code = generateInterface(ast, 'Data');
       setOutput(code);
       trackConversion('typescript', { multiSample: false });
@@ -57,22 +65,47 @@ export default function JsonToTypescriptPage() {
     debouncedConvert();
   }, [input]);
 
+  const handleGenerateMock = () => {
+    if (!currentAST) return;
+    const mockData = generateMockData(currentAST, 1);
+    setInput(JSON.stringify(mockData, null, 2));
+    trackMockGeneration('json-to-typescript');
+  };
+
   return (
     <SplitLayout
       left={
         <>
           <div className="h-10 px-4 flex items-center justify-between border-b border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-950">
-            <span className="text-sm font-medium text-stone-700 dark:text-stone-300">JSON</span>
-            <InputSource 
-              onLoad={(json) => {
-                setInput(json);
-                trackFileLoad('file');
-              }} 
-              onClear={() => {
-                setInput('');
-                trackClear();
-              }} 
-            />
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium text-stone-700 dark:text-stone-300">JSON</span>
+              <JsonUtilities
+                onPrettify={() => setInput(prettifyJson(input))}
+                onMinify={() => setInput(minifyJson(input))}
+                onSort={() => setInput(sortJsonKeys(input))}
+                onRemoveNulls={() => setInput(removeNullValues(input))}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              {currentAST && (
+                <button
+                  onClick={handleGenerateMock}
+                  className="text-xs px-2 py-1 rounded bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors"
+                >
+                  Generate Mock
+                </button>
+              )}
+              <InputSource 
+                onLoad={(json) => {
+                  setInput(json);
+                  trackFileLoad('file');
+                }} 
+                onClear={() => {
+                  setInput('');
+                  trackClear();
+                }} 
+              />
+            </div>
           </div>
           <div className="flex-1 min-h-0">
             <JsonEditor value={input} onChange={setInput} />

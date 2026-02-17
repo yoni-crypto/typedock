@@ -17,3 +17,7 @@ export function trackFileLoad(source: 'file' | 'url') {
 export function trackClear() {
   trackEvent('json_cleared');
 }
+
+export function trackMockGeneration(tool: string) {
+  trackEvent('mock_data_generated', { tool });
+}
