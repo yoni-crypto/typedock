@@ -78,7 +78,7 @@ export default function ValidatorPage() {
                   noEmit: true,
                   esModuleInterop: true,
                   jsx: monaco.languages.typescript.JsxEmit.React,
-                  allowJs: true,
+                  allowJs: false,
                   typeRoots: ['node_modules/@types'],
                 });
 
