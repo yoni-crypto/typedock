@@ -154,6 +154,110 @@ export default function HomePage() {
           </Link>
 
           <Link
+            href="/csv-to-json"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">CSV to JSON</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Convert CSV data to JSON format</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/xml-to-json"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">XML to JSON</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Convert between XML and JSON formats</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/yaml-to-json"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">YAML to JSON</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Convert between YAML and JSON formats</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/regex-tester"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">RegEx Tester</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Test regex patterns with match highlighting</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/color-converter"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">Color Converter</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Convert HEX, RGB, HSL color formats</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/qr-generator"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">QR Code Generator</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Generate QR codes from text or URLs</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/ascii-art"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">ASCII Art Generator</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Convert text to ASCII art</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/image-compressor"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">Image Compressor</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Compress images client-side</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
             href="/base64"
             className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
           >

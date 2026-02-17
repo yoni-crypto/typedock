@@ -19,6 +19,14 @@ const tools = [
   { href: '/json-diff', label: 'JSON Diff' },
   { href: '/json-formatter', label: 'JSON Formatter' },
   { href: '/validator', label: 'Validator' },
+  { href: '/csv-to-json', label: 'CSV → JSON' },
+  { href: '/xml-to-json', label: 'XML ⇄ JSON' },
+  { href: '/yaml-to-json', label: 'YAML ⇄ JSON' },
+  { href: '/regex-tester', label: 'RegEx Tester' },
+  { href: '/color-converter', label: 'Color Converter' },
+  { href: '/qr-generator', label: 'QR Generator' },
+  { href: '/ascii-art', label: 'ASCII Art' },
+  { href: '/image-compressor', label: 'Image Compressor' },
   { href: '/base64', label: 'Base64' },
   { href: '/jwt-decoder', label: 'JWT Decoder' },
   { href: '/hash-generator', label: 'Hash Generator' },
@@ -40,7 +48,7 @@ export function SplitLayout({ left, right }: SplitLayoutProps) {
       </header>
 
       <div className="flex-1 flex min-h-0">
-        <aside className="w-48 border-r border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 flex flex-col shrink-0">
+        <aside className="w-48 border-r border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 flex flex-col shrink-0 overflow-y-auto">
           <nav className="py-2">
             {tools.map((tool) => (
               <Link
