@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 import { Analytics } from "@vercel/analytics/next";
+import { baseMetadata } from "@/lib/seo/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TypeDock - JSON to TypeScript & Zod",
-  description: "Fast, zero-login, fully client-side developer tool for converting JSON into TypeScript interfaces and Zod schemas.",
+  ...baseMetadata,
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({

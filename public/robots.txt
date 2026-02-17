@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://typedock.vercel.app/sitemap.xml

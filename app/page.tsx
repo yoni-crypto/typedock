@@ -1,9 +1,19 @@
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import { websiteSchema, organizationSchema } from '@/lib/seo/schema';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-stone-950">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <div className="min-h-screen flex flex-col bg-white dark:bg-stone-950">
       <header className="border-b border-stone-200 dark:border-stone-800">
         <div className="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
           <Link href="/" className="text-base font-semibold text-stone-900 dark:text-stone-100">
@@ -92,5 +102,6 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
