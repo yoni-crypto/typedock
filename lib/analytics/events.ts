@@ -6,7 +6,7 @@ export function trackEvent(eventName: string, properties?: Record<string, unknow
   }
 }
 
-export function trackConversion(tool: 'typescript' | 'zod', properties?: Record<string, unknown>) {
+export function trackConversion(tool: 'typescript' | 'zod' | 'typescript-to-zod', properties?: Record<string, unknown>) {
   trackEvent('conversion_generated', { tool, ...properties });
 }
 
