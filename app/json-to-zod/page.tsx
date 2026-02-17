@@ -27,7 +27,11 @@ const DEFAULT_JSON = `{
   "active": true
 }`;
 
-const TABS = ['Schema', 'Interface', 'Both'];
+const TABS = [
+  { id: 'Schema', label: 'Schema' },
+  { id: 'Interface', label: 'Interface' },
+  { id: 'Both', label: 'Both' }
+];
 
 export default function JsonToZodPage() {
   const [input, setInput] = useState(DEFAULT_JSON);
