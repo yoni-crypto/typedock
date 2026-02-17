@@ -18,6 +18,7 @@ const tools = [
   { href: '/zod-to-typescript', label: 'Zod → TypeScript' },
   { href: '/json-diff', label: 'JSON Diff' },
   { href: '/validator', label: 'Validator' },
+  { href: '/base64', label: 'Base64' },
 ];
 
 export function SplitLayout({ left, right }: SplitLayoutProps) {

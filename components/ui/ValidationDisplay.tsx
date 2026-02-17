@@ -1,6 +1,7 @@
 'use client';
 
 import type { ValidationResult } from '@/lib/utils/zodValidator';
+import { CopyButton } from './CopyButton';
 
 interface ValidationDisplayProps {
   result: ValidationResult;
@@ -28,8 +29,11 @@ export function ValidationDisplay({ result }: ValidationDisplayProps) {
         
         {dataString && (
           <div className="mt-4">
-            <h4 className="text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">Validated Data:</h4>
-            <pre className="text-xs bg-stone-50 dark:bg-stone-900 p-3 rounded border border-stone-200 dark:border-stone-800 overflow-auto">
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="text-sm font-medium text-stone-700 dark:text-stone-300">Validated Data:</h4>
+              <CopyButton text={dataString} />
+            </div>
+            <pre className="text-xs bg-stone-50 dark:bg-stone-900 p-3 rounded border border-stone-200 dark:border-stone-800 overflow-auto max-h-96">
               {dataString}
             </pre>
           </div>
@@ -54,11 +58,11 @@ export function ValidationDisplay({ result }: ValidationDisplayProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 max-h-96 overflow-auto">
         {result.errors?.map((error, index) => (
           <div
             key={index}
-            className="p-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded"
+            className="p-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded hover:border-stone-300 dark:hover:border-stone-700 transition-colors"
           >
             <div className="flex items-start gap-2">
               <code className="text-xs font-mono text-stone-900 dark:text-stone-100 bg-stone-200 dark:bg-stone-800 px-2 py-0.5 rounded">
