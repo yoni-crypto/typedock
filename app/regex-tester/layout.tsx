@@ -3,7 +3,7 @@ import { toolsMetadata, getToolInfo } from '@/lib/seo/toolsMetadata';
 import { toolPageSchemas } from '@/lib/seo/structuredData';
 import { siteConfig } from '@/lib/seo/metadata';
 
-const toolId = 'json-diff';
+const toolId = 'regex-tester';
 const tool = getToolInfo(toolId)!;
 
 export const metadata: Metadata = toolsMetadata[toolId];
@@ -14,38 +14,39 @@ const structuredData = toolPageSchemas(
   `${siteConfig.url}${tool.path}`,
   tool.features,
   [
-    'Paste or upload the first JSON object',
-    'Paste or upload the second JSON object',
-    'View the side-by-side comparison with differences highlighted',
-    'Review additions, deletions, and modifications',
+    'Enter your regular expression pattern',
+    'Type or paste test text in the input area',
+    'View live match highlighting and groups',
+    'Adjust flags (g, i, m, s, u, y) as needed',
+    'Test replacements and capture groups',
   ],
   [
     {
-      question: 'Is this JSON diff tool free?',
+      question: 'Is this regex tester free?',
       answer: 'Yes, completely free! No sign-up required, no usage limits, and 100% client-side processing.',
     },
     {
-      question: 'How are differences displayed?',
-      answer: 'Differences are shown with color coding: green for additions, red for deletions, and yellow for modifications.',
+      question: 'Which regex flavors are supported?',
+      answer: 'This tester uses JavaScript/ECMAScript regex engine, which works in Node.js and all modern browsers.',
     },
     {
-      question: 'Does it handle nested objects and arrays?',
-      answer: 'Yes! The tool performs deep comparison of nested structures and arrays, showing exactly where changes occurred.',
+      question: 'Can I test regex replacements?',
+      answer: 'Yes! The tool includes a replace mode where you can test find-and-replace operations with capture groups.',
     },
     {
-      question: 'Can I compare large JSON files?',
-      answer: 'Yes! The tool handles large JSON files efficiently with optimized comparison algorithms.',
+      question: 'What regex flags are supported?',
+      answer: 'All JavaScript flags are supported: g (global), i (ignore case), m (multiline), s (dotall), u (unicode), and y (sticky).',
     },
     {
       question: 'Is my data safe when using this tool?',
-      answer: '100%! All comparison happens client-side in your browser. Your JSON data never leaves your device.',
+      answer: '100%! All processing happens client-side in your browser. Your patterns and test text never leave your device.',
     },
   ],
   [
     { name: 'Home', url: siteConfig.url },
-    { name: 'JSON Diff', url: `${siteConfig.url}${tool.path}` },
+    { name: 'RegEx Tester', url: `${siteConfig.url}${tool.path}` },
   ],
-  { value: 4.8, count: 1432 }
+  { value: 4.8, count: 1893 }
 );
 
 export default function Layout({ children }: { children: React.ReactNode }) {

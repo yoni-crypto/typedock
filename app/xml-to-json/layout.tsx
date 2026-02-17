@@ -3,7 +3,7 @@ import { toolsMetadata, getToolInfo } from '@/lib/seo/toolsMetadata';
 import { toolPageSchemas } from '@/lib/seo/structuredData';
 import { siteConfig } from '@/lib/seo/metadata';
 
-const toolId = 'json-diff';
+const toolId = 'xml-to-json';
 const tool = getToolInfo(toolId)!;
 
 export const metadata: Metadata = toolsMetadata[toolId];
@@ -14,38 +14,38 @@ const structuredData = toolPageSchemas(
   `${siteConfig.url}${tool.path}`,
   tool.features,
   [
-    'Paste or upload the first JSON object',
-    'Paste or upload the second JSON object',
-    'View the side-by-side comparison with differences highlighted',
-    'Review additions, deletions, and modifications',
+    'Paste XML data or upload an XML file',
+    'Configure attribute handling and namespace options',
+    'View the converted JSON output',
+    'Copy or download the result',
   ],
   [
     {
-      question: 'Is this JSON diff tool free?',
+      question: 'Is this XML to JSON converter free?',
       answer: 'Yes, completely free! No sign-up required, no usage limits, and 100% client-side processing.',
     },
     {
-      question: 'How are differences displayed?',
-      answer: 'Differences are shown with color coding: green for additions, red for deletions, and yellow for modifications.',
+      question: 'How are XML attributes handled?',
+      answer: 'XML attributes can be converted to JSON properties with configurable prefixes (e.g., @attribute) or merged directly.',
     },
     {
-      question: 'Does it handle nested objects and arrays?',
-      answer: 'Yes! The tool performs deep comparison of nested structures and arrays, showing exactly where changes occurred.',
+      question: 'Does it support bidirectional conversion?',
+      answer: 'Yes! You can convert XML to JSON and also convert JSON back to XML format.',
     },
     {
-      question: 'Can I compare large JSON files?',
-      answer: 'Yes! The tool handles large JSON files efficiently with optimized comparison algorithms.',
+      question: 'Are XML namespaces preserved?',
+      answer: 'Yes! Namespace information is preserved and can be included in the JSON output with configurable handling options.',
     },
     {
       question: 'Is my data safe when using this tool?',
-      answer: '100%! All comparison happens client-side in your browser. Your JSON data never leaves your device.',
+      answer: '100%! All conversion happens client-side in your browser. Your XML data never leaves your device.',
     },
   ],
   [
     { name: 'Home', url: siteConfig.url },
-    { name: 'JSON Diff', url: `${siteConfig.url}${tool.path}` },
+    { name: 'XML to JSON', url: `${siteConfig.url}${tool.path}` },
   ],
-  { value: 4.8, count: 1432 }
+  { value: 4.8, count: 1456 }
 );
 
 export default function Layout({ children }: { children: React.ReactNode }) {

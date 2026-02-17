@@ -1,26 +1,28 @@
 import { MetadataRoute } from 'next';
+import { toolsData } from '@/lib/seo/toolsMetadata';
+import { siteConfig } from '@/lib/seo/metadata';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://typedock.vercel.app';
+  const lastModified = new Date();
+  
+  const tools = Object.entries(toolsData).map(([id, tool]) => ({
+    path: tool.path,
+    priority: tool.priority,
+    changeFrequency: tool.changeFrequency,
+  }));
   
   return [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: siteConfig.url,
+      lastModified,
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: 1.0,
     },
-    {
-      url: `${baseUrl}/json-to-typescript`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/json-to-zod`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
+    ...tools.map(tool => ({
+      url: `${siteConfig.url}${tool.path}`,
+      lastModified,
+      changeFrequency: tool.changeFrequency as 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never',
+      priority: tool.priority,
+    })),
   ];
 }

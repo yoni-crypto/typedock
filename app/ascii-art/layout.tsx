@@ -3,7 +3,7 @@ import { toolsMetadata, getToolInfo } from '@/lib/seo/toolsMetadata';
 import { toolPageSchemas } from '@/lib/seo/structuredData';
 import { siteConfig } from '@/lib/seo/metadata';
 
-const toolId = 'json-schema-to-typescript';
+const toolId = 'ascii-art';
 const tool = getToolInfo(toolId)!;
 
 export const metadata: Metadata = toolsMetadata[toolId];
@@ -14,36 +14,36 @@ const structuredData = toolPageSchemas(
   `${siteConfig.url}${tool.path}`,
   tool.features,
   [
-    'Paste your JSON Schema definition',
-    'Select TypeScript generation options',
-    'View the generated TypeScript interfaces and types',
-    'Copy the TypeScript code to your clipboard',
+    'Type the text you want to convert to ASCII art',
+    'Select a font style from the available options',
+    'Preview the ASCII art in real-time',
+    'Copy the ASCII art to your clipboard',
   ],
   [
     {
-      question: 'Is this JSON Schema to TypeScript converter free?',
+      question: 'Is this ASCII art generator free?',
       answer: 'Yes, completely free! No sign-up required, no usage limits, and 100% client-side processing.',
     },
     {
-      question: 'What schema features are supported?',
-      answer: 'The tool supports references ($ref), enums, union types (anyOf, oneOf), allOf, arrays, nested objects, and complex type definitions.',
+      question: 'What font styles are available?',
+      answer: 'The tool includes various font styles like banner, block, standard, slant, and decorative fonts for different aesthetics.',
     },
     {
-      question: 'Can I generate interfaces or type aliases?',
-      answer: 'Yes! You can choose to generate TypeScript interfaces or type aliases based on your preference.',
+      question: 'Can I use special characters?',
+      answer: 'Yes! The tool supports a wide range of characters including letters, numbers, and many special characters.',
     },
     {
-      question: 'How are schema references handled?',
-      answer: 'JSON Schema $ref references are resolved and converted to appropriate TypeScript imports or inline types.',
+      question: 'Where can I use ASCII art?',
+      answer: 'ASCII art is perfect for terminal headers, code comments, README files, creative projects, and documentation.',
     },
     {
       question: 'Is my data safe when using this tool?',
-      answer: '100%! All conversion happens client-side in your browser. Your schemas never leave your device.',
+      answer: '100%! All processing happens client-side in your browser. Your text never leaves your device.',
     },
   ],
   [
     { name: 'Home', url: siteConfig.url },
-    { name: 'JSON Schema to TypeScript', url: `${siteConfig.url}${tool.path}` },
+    { name: 'ASCII Art Generator', url: `${siteConfig.url}${tool.path}` },
   ],
   { value: 4.8, count: 1234 }
 );

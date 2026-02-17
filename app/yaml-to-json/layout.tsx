@@ -3,7 +3,7 @@ import { toolsMetadata, getToolInfo } from '@/lib/seo/toolsMetadata';
 import { toolPageSchemas } from '@/lib/seo/structuredData';
 import { siteConfig } from '@/lib/seo/metadata';
 
-const toolId = 'json-diff';
+const toolId = 'yaml-to-json';
 const tool = getToolInfo(toolId)!;
 
 export const metadata: Metadata = toolsMetadata[toolId];
@@ -14,38 +14,38 @@ const structuredData = toolPageSchemas(
   `${siteConfig.url}${tool.path}`,
   tool.features,
   [
-    'Paste or upload the first JSON object',
-    'Paste or upload the second JSON object',
-    'View the side-by-side comparison with differences highlighted',
-    'Review additions, deletions, and modifications',
+    'Paste YAML content or upload a YAML file',
+    'Configure anchor/alias resolution options',
+    'View the converted JSON output',
+    'Copy or download the result',
   ],
   [
     {
-      question: 'Is this JSON diff tool free?',
+      question: 'Is this YAML to JSON converter free?',
       answer: 'Yes, completely free! No sign-up required, no usage limits, and 100% client-side processing.',
     },
     {
-      question: 'How are differences displayed?',
-      answer: 'Differences are shown with color coding: green for additions, red for deletions, and yellow for modifications.',
+      question: 'Does it support multi-document YAML files?',
+      answer: 'Yes! The tool can handle YAML files with multiple documents separated by --- and convert them to JSON arrays.',
     },
     {
-      question: 'Does it handle nested objects and arrays?',
-      answer: 'Yes! The tool performs deep comparison of nested structures and arrays, showing exactly where changes occurred.',
+      question: 'How are YAML anchors and aliases handled?',
+      answer: 'Anchors and aliases are resolved automatically, creating proper JSON structures without references.',
     },
     {
-      question: 'Can I compare large JSON files?',
-      answer: 'Yes! The tool handles large JSON files efficiently with optimized comparison algorithms.',
+      question: 'Can I convert JSON back to YAML?',
+      answer: 'Yes! The tool supports bidirectional conversion, so you can convert JSON to YAML format as well.',
     },
     {
       question: 'Is my data safe when using this tool?',
-      answer: '100%! All comparison happens client-side in your browser. Your JSON data never leaves your device.',
+      answer: '100%! All conversion happens client-side in your browser. Your YAML data never leaves your device.',
     },
   ],
   [
     { name: 'Home', url: siteConfig.url },
-    { name: 'JSON Diff', url: `${siteConfig.url}${tool.path}` },
+    { name: 'YAML to JSON', url: `${siteConfig.url}${tool.path}` },
   ],
-  { value: 4.8, count: 1432 }
+  { value: 4.8, count: 1678 }
 );
 
 export default function Layout({ children }: { children: React.ReactNode }) {

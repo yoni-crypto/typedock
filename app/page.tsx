@@ -1,18 +1,42 @@
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
-import { websiteSchema, organizationSchema } from '@/lib/seo/schema';
+import { homePageSchemas, faqSchema } from '@/lib/seo/structuredData';
+
+const homeFAQs = [
+  {
+    question: 'Are TypeDock tools really free?',
+    answer: 'Yes! All 23 tools are completely free to use. No sign-up required, no credit card needed, and no usage limits.',
+  },
+  {
+    question: 'Is my data safe with TypeDock?',
+    answer: 'Absolutely! All tools run 100% client-side in your browser. Your data never leaves your device or gets sent to any server.',
+  },
+  {
+    question: 'Do I need to create an account?',
+    answer: 'No account or sign-up is required. Just visit the tool you need and start using it immediately.',
+  },
+  {
+    question: 'Can I use these tools offline?',
+    answer: 'Yes! Since all processing happens in your browser, you can use the tools offline after the initial page load.',
+  },
+  {
+    question: 'What makes TypeDock different from other tool sites?',
+    answer: 'TypeDock focuses on privacy (no data sent to servers), quality (23 carefully crafted tools), and developer experience (clean UI, instant results).',
+  },
+];
+
+const schemas = [...homePageSchemas(), faqSchema(homeFAQs)];
 
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
+      {schemas.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <div className="min-h-screen bg-gradient-to-b from-white to-stone-50 dark:from-stone-950 dark:to-stone-900">
         <header className="border-b border-stone-200 dark:border-stone-800 bg-white/80 dark:bg-stone-950/80 backdrop-blur-sm sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -34,10 +58,10 @@ export default function HomePage() {
         <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 mb-4 tracking-tight">
-              Essential Developer Tools
+              23 Free Developer Tools for Modern Development
             </h1>
             <p className="text-lg text-stone-600 dark:text-stone-400 mb-6 max-w-2xl">
-              23 powerful, privacy-focused tools for modern development. Convert formats, test patterns, generate code—all running locally in your browser.
+              Convert JSON to TypeScript, test regex patterns, generate QR codes, and more. All tools run locally in your browser—no sign-up, no tracking, 100% privacy-focused.
             </p>
             <div className="flex flex-wrap gap-6 text-sm text-stone-600 dark:text-stone-400">
               <div className="flex items-center gap-2">

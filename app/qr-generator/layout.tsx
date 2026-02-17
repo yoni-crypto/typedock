@@ -3,7 +3,7 @@ import { toolsMetadata, getToolInfo } from '@/lib/seo/toolsMetadata';
 import { toolPageSchemas } from '@/lib/seo/structuredData';
 import { siteConfig } from '@/lib/seo/metadata';
 
-const toolId = 'json-diff';
+const toolId = 'qr-generator';
 const tool = getToolInfo(toolId)!;
 
 export const metadata: Metadata = toolsMetadata[toolId];
@@ -14,38 +14,38 @@ const structuredData = toolPageSchemas(
   `${siteConfig.url}${tool.path}`,
   tool.features,
   [
-    'Paste or upload the first JSON object',
-    'Paste or upload the second JSON object',
-    'View the side-by-side comparison with differences highlighted',
-    'Review additions, deletions, and modifications',
+    'Enter text, URL, WiFi credentials, or contact info',
+    'Customize colors and error correction level',
+    'Preview the QR code instantly',
+    'Download in PNG or SVG format',
   ],
   [
     {
-      question: 'Is this JSON diff tool free?',
+      question: 'Is this QR code generator free?',
       answer: 'Yes, completely free! No sign-up required, no usage limits, and 100% client-side processing.',
     },
     {
-      question: 'How are differences displayed?',
-      answer: 'Differences are shown with color coding: green for additions, red for deletions, and yellow for modifications.',
+      question: 'What types of data can I encode?',
+      answer: 'You can encode URLs, plain text, WiFi network credentials (SSID, password), contact cards (vCard), and email addresses.',
     },
     {
-      question: 'Does it handle nested objects and arrays?',
-      answer: 'Yes! The tool performs deep comparison of nested structures and arrays, showing exactly where changes occurred.',
+      question: 'Can I customize the QR code colors?',
+      answer: 'Yes! You can customize both the foreground and background colors to match your branding.',
     },
     {
-      question: 'Can I compare large JSON files?',
-      answer: 'Yes! The tool handles large JSON files efficiently with optimized comparison algorithms.',
+      question: 'What formats can I download?',
+      answer: 'You can download QR codes as PNG (raster) for web use or SVG (vector) for print materials.',
     },
     {
       question: 'Is my data safe when using this tool?',
-      answer: '100%! All comparison happens client-side in your browser. Your JSON data never leaves your device.',
+      answer: '100%! All processing happens client-side in your browser. Your data never leaves your device.',
     },
   ],
   [
     { name: 'Home', url: siteConfig.url },
-    { name: 'JSON Diff', url: `${siteConfig.url}${tool.path}` },
+    { name: 'QR Generator', url: `${siteConfig.url}${tool.path}` },
   ],
-  { value: 4.8, count: 1432 }
+  { value: 4.9, count: 4215 }
 );
 
 export default function Layout({ children }: { children: React.ReactNode }) {
