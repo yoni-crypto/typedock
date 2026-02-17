@@ -22,6 +22,9 @@ const tools = [
   { href: '/base64', label: 'Base64' },
   { href: '/jwt-decoder', label: 'JWT Decoder' },
   { href: '/hash-generator', label: 'Hash Generator' },
+  { href: '/uuid-generator', label: 'UUID Generator' },
+  { href: '/url-encoder', label: 'URL Encoder' },
+  { href: '/timestamp-converter', label: 'Timestamp' },
 ];
 
 export function SplitLayout({ left, right }: SplitLayoutProps) {

@@ -191,6 +191,45 @@ export default function HomePage() {
               <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
             </div>
           </Link>
+
+          <Link
+            href="/uuid-generator"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">UUID Generator</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Generate v4 UUIDs with bulk options</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/url-encoder"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">URL Encoder/Decoder</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Encode and decode URLs</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/timestamp-converter"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">Timestamp Converter</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Convert Unix timestamps to dates</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
         </div>
 
         <div className="border-t border-stone-200 dark:border-stone-800 pt-10">
