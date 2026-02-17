@@ -128,6 +128,19 @@ export default function HomePage() {
           </Link>
 
           <Link
+            href="/json-formatter"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">JSON Formatter</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Format, validate, and beautify JSON</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
             href="/validator"
             className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
           >
@@ -148,6 +161,32 @@ export default function HomePage() {
               <div>
                 <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">Base64 Encoder/Decoder</h2>
                 <p className="text-sm text-stone-500 dark:text-stone-400">Encode and decode Base64 strings</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/jwt-decoder"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">JWT Decoder</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Decode JWT tokens and view claims</p>
+              </div>
+              <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/hash-generator"
+            className="block p-5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-lg hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-sm transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-medium text-stone-900 dark:text-stone-100 mb-1">Hash Generator</h2>
+                <p className="text-sm text-stone-500 dark:text-stone-400">Generate MD5, SHA-1, SHA-256, SHA-512 hashes</p>
               </div>
               <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">→</span>
             </div>

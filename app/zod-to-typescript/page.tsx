@@ -59,6 +59,17 @@ export default function ZodToTypescriptPage() {
                 automaticLayout: true,
                 tabSize: 2,
               }}
+              beforeMount={(monaco) => {
+                monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+                  noSemanticValidation: true,
+                  noSyntaxValidation: false,
+                });
+                
+                monaco.languages.typescript.typescriptDefaults.addExtraLib(
+                  `declare const z: any;`,
+                  'file:///node_modules/@types/zod/index.d.ts'
+                );
+              }}
             />
           </div>
         </>

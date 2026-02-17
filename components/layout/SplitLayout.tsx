@@ -17,8 +17,11 @@ const tools = [
   { href: '/typescript-to-zod', label: 'TypeScript → Zod' },
   { href: '/zod-to-typescript', label: 'Zod → TypeScript' },
   { href: '/json-diff', label: 'JSON Diff' },
+  { href: '/json-formatter', label: 'JSON Formatter' },
   { href: '/validator', label: 'Validator' },
   { href: '/base64', label: 'Base64' },
+  { href: '/jwt-decoder', label: 'JWT Decoder' },
+  { href: '/hash-generator', label: 'Hash Generator' },
 ];
 
 export function SplitLayout({ left, right }: SplitLayoutProps) {
