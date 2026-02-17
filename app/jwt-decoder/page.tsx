@@ -9,8 +9,10 @@ import { debounce } from '@/lib/utils/debounce';
 import Editor from '@monaco-editor/react';
 import { useTheme } from '@/components/theme/ThemeProvider';
 
+const DEFAULT_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
 export default function JWTDecoderPage() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(DEFAULT_JWT);
   const [header, setHeader] = useState('');
   const [payload, setPayload] = useState('');
   const [signature, setSignature] = useState('');

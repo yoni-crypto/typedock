@@ -8,8 +8,10 @@ import { debounce } from '@/lib/utils/debounce';
 import Editor from '@monaco-editor/react';
 import { useTheme } from '@/components/theme/ThemeProvider';
 
+const DEFAULT_TEXT = 'Hello, TypeDock!';
+
 export default function HashGeneratorPage() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(DEFAULT_TEXT);
   const [hashes, setHashes] = useState<HashResult | null>(null);
   const { theme } = useTheme();
 

@@ -14,8 +14,14 @@ import Editor from '@monaco-editor/react';
 import { useTheme } from '@/components/theme/ThemeProvider';
 import type { ASTType } from '@/lib/inference/astTypes';
 
+const DEFAULT_JSON = `{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "age": 30
+}`;
+
 export default function JsonFormatterPage() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(DEFAULT_JSON);
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
   const [currentAST, setCurrentAST] = useState<ASTType | null>(null);

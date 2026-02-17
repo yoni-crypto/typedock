@@ -9,8 +9,10 @@ import { debounce } from '@/lib/utils/debounce';
 import Editor from '@monaco-editor/react';
 import { useTheme } from '@/components/theme/ThemeProvider';
 
+const DEFAULT_TEXT = 'Hello, TypeDock!';
+
 export default function Base64Page() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(DEFAULT_TEXT);
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
