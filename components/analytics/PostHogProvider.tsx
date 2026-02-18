@@ -23,7 +23,10 @@ function PostHogPageView() {
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    initPostHog();
+    const consent = localStorage.getItem('cookie-consent');
+    if (consent === 'accepted') {
+      initPostHog();
+    }
   }, []);
 
   return (

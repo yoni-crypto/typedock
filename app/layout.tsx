@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { PostHogProvider } from "@/components/analytics/PostHogProvider";
-import { Analytics } from "@vercel/analytics/next";
+import { ConditionalAnalytics } from "@/components/analytics/ConditionalAnalytics";
+import { CookieConsent } from "@/components/ui/CookieConsent";
 import { baseMetadata, siteConfig, viewport as viewportConfig } from "@/lib/seo/metadata";
 import { organizationSchema, websiteSchema, webPageSchema } from "@/lib/seo/structuredData";
 
@@ -85,9 +86,10 @@ export default function RootLayout({
         <PostHogProvider>
           <ThemeProvider>
             {children}
+            <CookieConsent />
           </ThemeProvider>
         </PostHogProvider>
-        <Analytics />
+        <ConditionalAnalytics />
       </body>
     </html>
   );

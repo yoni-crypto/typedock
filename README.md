@@ -25,7 +25,6 @@
 
 - 100% client-side processing - your data never leaves your browser
 - No sign-up or authentication required
-- No tracking or analytics
 - Dark mode support
 - Keyboard shortcuts
 - Clean, minimal UI
