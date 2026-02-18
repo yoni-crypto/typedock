@@ -9,20 +9,26 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@iarna/toml": "^2.2.5",
     "@monaco-editor/react": "^4.7.0",
     "@vercel/analytics": "^1.6.1",
     "bcryptjs": "^3.0.3",
     "highlight.js": "^11.11.1",
     "js-yaml": "^4.1.1",
+    "js2xmlparser": "^5.0.0",
+    "jsonpath-plus": "^10.4.0",
     "marked": "^17.0.3",
     "next": "16.1.6",
+    "papaparse": "^5.5.3",
     "posthog-js": "^1.347.2",
     "qrcode": "^1.5.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "semver": "^7.7.4",
     "sql-formatter": "^15.7.2",
     "turndown": "^7.2.2",
     "turndown-plugin-gfm": "^1.0.2",
+    "ua-parser-js": "^2.0.9",
     "zod": "^4.3.6"
   },
   "devDependencies": {

@@ -5,7 +5,7 @@ import { homePageSchemas, faqSchema } from '@/lib/seo/structuredData';
 const homeFAQs = [
   {
     question: 'Are TypeDock tools really free?',
-    answer: 'Yes! All 39 tools are completely free to use. No sign-up required, no credit card needed, and no usage limits.',
+    answer: 'Yes! All 52 tools are completely free to use. No sign-up required, no credit card needed, and no usage limits.',
   },
   {
     question: 'Is my data safe with TypeDock?',
@@ -21,7 +21,7 @@ const homeFAQs = [
   },
   {
     question: 'What makes TypeDock different from other tool sites?',
-    answer: 'TypeDock focuses on privacy (no data sent to servers), quality (39 carefully crafted tools), and developer experience (clean UI, instant results).',
+    answer: 'TypeDock focuses on privacy (no data sent to servers), quality (52 carefully crafted tools), and developer experience (clean UI, instant results).',
   },
 ];
 
@@ -58,7 +58,7 @@ export default function HomePage() {
         <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 mb-4 tracking-tight">
-              39 Free Developer Tools for Modern Development
+              52 Free Developer Tools for Modern Development
             </h1>
             <p className="text-lg text-stone-600 dark:text-stone-400 mb-6 max-w-2xl">
               Convert JSON to TypeScript, test regex patterns, generate QR codes, and more. All tools run locally in your browser—no sign-up, no tracking, 100% privacy-focused.
@@ -89,7 +89,7 @@ export default function HomePage() {
         <section id="tools" className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-stone-900 dark:text-stone-100 mb-3">All Tools</h2>
-            <p className="text-stone-600 dark:text-stone-400">39 powerful tools to boost your productivity</p>
+            <p className="text-stone-600 dark:text-stone-400">52 powerful tools to boost your productivity</p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -132,6 +132,19 @@ export default function HomePage() {
               { name: 'HTML Minifier', href: '/html-minifier', desc: 'Minify & beautify HTML', color: 'from-orange-400 to-orange-500' },
               { name: 'JWT Generator', href: '/jwt-generator', desc: 'Create JWT tokens', color: 'from-purple-400 to-purple-500' },
               { name: 'XML Formatter', href: '/xml-formatter', desc: 'Format & minify XML', color: 'from-cyan-400 to-cyan-500' },
+              { name: 'JSON Path', href: '/json-path', desc: 'Query JSON with expressions', color: 'from-lime-500 to-lime-600' },
+              { name: 'JSON Minify', href: '/json-minify', desc: 'Compress JSON size', color: 'from-green-500 to-green-600' },
+              { name: 'JSON to CSV', href: '/json-to-csv', desc: 'Export JSON to CSV', color: 'from-emerald-500 to-emerald-600' },
+              { name: 'JSON to TOML', href: '/json-to-toml', desc: 'Convert to TOML format', color: 'from-rose-500 to-rose-600' },
+              { name: 'JSON to ENV', href: '/json-to-env', desc: 'Generate env variables', color: 'from-amber-500 to-amber-600' },
+              { name: 'TOML to JSON', href: '/toml-to-json', desc: 'Parse TOML files', color: 'from-pink-500 to-pink-600' },
+              { name: 'HTML Entities', href: '/html-entities', desc: 'Encode/decode entities', color: 'from-orange-500 to-orange-600' },
+              { name: 'Unicode Escape', href: '/unicode-escape', desc: 'Escape Unicode chars', color: 'from-violet-500 to-violet-600' },
+              { name: 'cURL to Fetch', href: '/curl-to-fetch', desc: 'Convert cURL commands', color: 'from-blue-500 to-blue-600' },
+              { name: 'User Agent Parser', href: '/user-agent-parser', desc: 'Detect browser & OS', color: 'from-cyan-500 to-cyan-600' },
+              { name: 'Semver Checker', href: '/semver-checker', desc: 'Version comparison', color: 'from-indigo-500 to-indigo-600' },
+              { name: 'CSS Box Shadow', href: '/css-box-shadow', desc: 'Visual shadow builder', color: 'from-slate-500 to-slate-600' },
+              { name: 'CSS Gradient', href: '/css-gradient', desc: 'Create CSS gradients', color: 'from-fuchsia-500 to-fuchsia-600' },
             ].map((tool) => (
               <Link
                 key={tool.href}
