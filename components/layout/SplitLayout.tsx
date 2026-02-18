@@ -10,44 +10,83 @@ interface SplitLayoutProps {
   right: React.ReactNode;
 }
 
-const tools = [
-  { href: '/json-to-typescript', label: 'JSON → TypeScript' },
-  { href: '/json-to-zod', label: 'JSON → Zod' },
-  { href: '/json-to-json-schema', label: 'JSON → JSON Schema' },
-  { href: '/json-schema-to-typescript', label: 'JSON Schema → TS' },
-  { href: '/typescript-to-zod', label: 'TypeScript → Zod' },
-  { href: '/zod-to-typescript', label: 'Zod → TypeScript' },
-  { href: '/json-diff', label: 'JSON Diff' },
-  { href: '/json-formatter', label: 'JSON Formatter' },
-  { href: '/validator', label: 'Validator' },
-  { href: '/csv-to-json', label: 'CSV → JSON' },
-  { href: '/xml-to-json', label: 'XML ⇄ JSON' },
-  { href: '/yaml-to-json', label: 'YAML ⇄ JSON' },
-  { href: '/json-to-yaml', label: 'JSON → YAML' },
-  { href: '/markdown-to-html', label: 'Markdown → HTML' },
-  { href: '/html-to-markdown', label: 'HTML → Markdown' },
-  { href: '/base-converter', label: 'Base Converter' },
-  { href: '/case-converter', label: 'Case Converter' },
-  { href: '/sql-formatter', label: 'SQL Formatter' },
-  { href: '/lorem-ipsum', label: 'Lorem Ipsum' },
-  { href: '/password-generator', label: 'Password Generator' },
-  { href: '/text-diff', label: 'Text Diff' },
-  { href: '/url-parser', label: 'URL Parser' },
-  { href: '/bcrypt', label: 'Bcrypt' },
-  { href: '/cron-generator', label: 'Cron Generator' },
-  { href: '/html-minifier', label: 'HTML Minifier' },
-  { href: '/jwt-generator', label: 'JWT Generator' },
-  { href: '/xml-formatter', label: 'XML Formatter' },
-{ href: '/uuid-v7', label: 'UUID Generator' },
-  { href: '/regex-tester', label: 'RegEx Tester' },
-  { href: '/color-converter', label: 'Color Converter' },
-  { href: '/qr-generator', label: 'QR Generator' },
-  { href: '/ascii-art', label: 'ASCII Art' },
-  { href: '/image-compressor', label: 'Image Compressor' },
-  { href: '/base64', label: 'Base64' },
-  { href: '/jwt-decoder', label: 'JWT Decoder' },
-  { href: '/hash-generator', label: 'Hash Generator' },
+interface Tool {
+  href: string;
+  label: string;
+}
+
+interface ToolGroup {
+  name: string;
+  tools: Tool[];
+}
+
+const toolGroups: ToolGroup[] = [
+  {
+    name: 'JSON',
+    tools: [
+      { href: '/json-to-typescript', label: 'JSON → TypeScript' },
+      { href: '/json-to-zod', label: 'JSON → Zod' },
+      { href: '/json-to-json-schema', label: 'JSON → JSON Schema' },
+      { href: '/json-schema-to-typescript', label: 'JSON Schema → TS' },
+      { href: '/typescript-to-zod', label: 'TypeScript → Zod' },
+      { href: '/zod-to-typescript', label: 'Zod → TypeScript' },
+      { href: '/json-diff', label: 'JSON Diff' },
+      { href: '/json-formatter', label: 'JSON Formatter' },
+      { href: '/csv-to-json', label: 'CSV → JSON' },
+      { href: '/xml-to-json', label: 'XML ⇄ JSON' },
+      { href: '/yaml-to-json', label: 'YAML ⇄ JSON' },
+      { href: '/json-to-yaml', label: 'JSON → YAML' },
+      { href: '/validator', label: 'Validator' },
+    ],
+  },
+  {
+    name: 'Encoding',
+    tools: [
+      { href: '/base64', label: 'Base64' },
+      { href: '/url-encoder', label: 'URL Encoder' },
+      { href: '/html-minifier', label: 'HTML Minifier' },
+      { href: '/xml-formatter', label: 'XML Formatter' },
+      { href: '/sql-formatter', label: 'SQL Formatter' },
+    ],
+  },
+  {
+    name: 'Converters',
+    tools: [
+      { href: '/base-converter', label: 'Base Converter' },
+      { href: '/markdown-to-html', label: 'Markdown → HTML' },
+      { href: '/html-to-markdown', label: 'HTML → Markdown' },
+      { href: '/case-converter', label: 'Case Converter' },
+      { href: '/color-converter', label: 'Color Converter' },
+    ],
+  },
+  {
+    name: 'Security',
+    tools: [
+      { href: '/password-generator', label: 'Password Generator' },
+      { href: '/hash-generator', label: 'Hash Generator' },
+      { href: '/bcrypt', label: 'Bcrypt' },
+      { href: '/jwt-decoder', label: 'JWT Decoder' },
+      { href: '/jwt-generator', label: 'JWT Generator' },
+    ],
+  },
+  {
+    name: 'Utilities',
+    tools: [
+      { href: '/text-diff', label: 'Text Diff' },
+      { href: '/lorem-ipsum', label: 'Lorem Ipsum' },
+      { href: '/regex-tester', label: 'RegEx Tester' },
+      { href: '/url-parser', label: 'URL Parser' },
+      { href: '/uuid-generator', label: 'UUID Generator' },
+      { href: '/timestamp-converter', label: 'Timestamp' },
+      { href: '/cron-generator', label: 'Cron Generator' },
+      { href: '/qr-generator', label: 'QR Generator' },
+      { href: '/ascii-art', label: 'ASCII Art' },
+      { href: '/image-compressor', label: 'Image Compressor' },
+    ],
+  },
 ];
+
+const allTools = toolGroups.flatMap(group => group.tools);
 
 export function SplitLayout({ left, right }: SplitLayoutProps) {
   const pathname = usePathname();
@@ -56,9 +95,13 @@ export function SplitLayout({ left, right }: SplitLayoutProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const filteredTools = tools.filter(tool => 
+  const filteredTools = allTools.filter(tool => 
     tool.label.toLowerCase().includes(search.toLowerCase())
   );
+
+  const filteredGroups = search
+    ? [{ name: 'Results', tools: filteredTools }]
+    : toolGroups;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -92,6 +135,8 @@ export function SplitLayout({ left, right }: SplitLayoutProps) {
     setSelectedIndex(0);
   }, [search]);
 
+  let globalIndex = -1;
+
   return (
     <div className="flex flex-col h-screen bg-white dark:bg-stone-950">
       <header className="h-12 border-b border-stone-200 dark:border-stone-800 flex items-center justify-between px-4 shrink-0 bg-white dark:bg-stone-950">
@@ -102,7 +147,7 @@ export function SplitLayout({ left, right }: SplitLayoutProps) {
       </header>
 
       <div className="flex-1 flex min-h-0">
-        <aside className="w-48 border-r border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 flex flex-col shrink-0">
+        <aside className="w-56 border-r border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 flex flex-col shrink-0">
           <div className="p-2 border-b border-stone-200 dark:border-stone-800">
             <div className="relative">
               <input
@@ -132,23 +177,33 @@ export function SplitLayout({ left, right }: SplitLayoutProps) {
             </div>
           </div>
           <nav className="py-2 overflow-y-auto flex-1">
-            {filteredTools.length > 0 ? (
-              filteredTools.map((tool, index) => (
-                <Link
-                  key={tool.href}
-                  href={tool.href}
-                  className={`block px-4 py-2 text-sm border-l-2 transition-colors ${
-                    pathname === tool.href
-                      ? 'border-stone-900 dark:border-stone-100 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 font-medium'
-                      : index === selectedIndex && search
-                      ? 'border-stone-400 dark:border-stone-600 bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
-                      : 'border-transparent text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 hover:bg-white dark:hover:bg-stone-800'
-                  }`}
-                >
-                  {tool.label}
-                </Link>
-              ))
-            ) : (
+            {filteredGroups.map((group) => (
+              <div key={group.name} className="mb-3">
+                <div className="px-6 py-1 text-xs font-bold text-stone-700 dark:text-stone-300 uppercase tracking-wider">
+                  {group.name}
+                </div>
+                {group.tools.map((tool) => {
+                  globalIndex++;
+                  const idx = globalIndex;
+                  return (
+                    <Link
+                      key={tool.href}
+                      href={tool.href}
+                      className={`block pl-8 pr-4 py-1.5 text-sm border-l-2 transition-colors ${
+                        pathname === tool.href
+                          ? 'border-stone-900 dark:border-stone-100 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 font-medium'
+                          : idx === selectedIndex && search
+                          ? 'border-stone-400 dark:border-stone-600 bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
+                          : 'border-transparent text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 hover:bg-white dark:hover:bg-stone-800'
+                      }`}
+                    >
+                      {tool.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
+            {filteredTools.length === 0 && (
               <div className="px-4 py-2 text-xs text-stone-500 dark:text-stone-400">
                 No tools found
               </div>
