@@ -13,7 +13,7 @@
 *JSON to TypeScript converter with Monaco editor*
 
 ![CSS Gradient Generator](./screenshots/css-gradient.png)
-*Visual CSS gradient builder*
+*Clean Visual CSS gradient builder*
 
 ![ASCII Art Generator](./screenshots/ascii.png)
 *Text to ASCII art converter*
